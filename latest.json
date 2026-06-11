@@ -1,13 +1,13 @@
 {
   "rp2040": {
-    "fw_ver": "1.1.9",
+    "fw_ver": "1.1.11",
     "arch": "rp2040",
-    "build": "Jun 10 2026 11:09:19",
-    "bin": "rfboard_rp2040_1.1.9_20260610-110919.bin",
-    "bin_url": "https://evenliesye0103-lang.github.io/rfboard-firmware/firmware/rfboard_rp2040_1.1.9_20260610-110919.bin"
+    "build": "Jun 11 2026 13:33:10",
+    "bin": "rfboard_rp2040_1.1.11_20260611-133310.bin",
+    "bin_url": "https://evenliesye0103-lang.github.io/rfboard-firmware/firmware/rfboard_rp2040_1.1.11_20260611-133310.bin"
   },
-  "fw_ver": "1.1.9",
-  "build": "Jun 10 2026 11:09:19",
-  "bin": "rfboard_rp2040_1.1.9_20260610-110919.bin",
-  "bin_url": "https://evenliesye0103-lang.github.io/rfboard-firmware/firmware/rfboard_rp2040_1.1.9_20260610-110919.bin"
+  "fw_ver": "1.1.11",
+  "build": "Jun 11 2026 13:33:10",
+  "bin": "rfboard_rp2040_1.1.11_20260611-133310.bin",
+  "bin_url": "https://evenliesye0103-lang.github.io/rfboard-firmware/firmware/rfboard_rp2040_1.1.11_20260611-133310.bin"
 }
