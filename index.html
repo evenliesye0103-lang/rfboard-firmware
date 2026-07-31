@@ -8,7 +8,10 @@
     body{font-family:Arial,sans-serif;max-width:900px;margin:40px auto;padding:0 16px;background:#0b1220;color:#d9e1f2}
     a{color:#7cc4ff}
     code,pre{background:#121c31;padding:2px 6px;border-radius:6px}
-    .card{background:#121c31;padding:20px;border-radius:14px}
+    .card{background:#121c31;padding:20px;border-radius:14px;margin-bottom:16px}
+    .btn{display:inline-block;background:#7cc4ff;color:#06111f;font-weight:bold;padding:10px 18px;border-radius:8px;text-decoration:none;margin-top:8px}
+    .btn:hover{filter:brightness(1.08)}
+    .muted{color:#93a3c2;font-size:0.85rem}
   </style>
 </head>
 <body>
@@ -17,6 +20,12 @@
     <p>Static firmware repository for RF-BOARD OTA update.</p>
     <p><a href="./latest.json">Open latest.json</a></p>
     <p><a href="./firmware/">Open firmware folder</a></p>
+  </div>
+
+  <div class="card">
+    <h2>Base Firmware</h2>
+    <p class="muted">Firmware awal untuk flashing pertama kali via BOOTSEL/UF2 (RF_RP2040_RX_V_1_0_SINGLECORE).</p>
+    <a class="btn" href="./basefirmware_rfboardrp2040_1_1_12/firmware.uf2" download>Download Base Firmware (.uf2) &mdash; v1.1.12</a>
   </div>
 </body>
 </html>
