@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>RF-BOARD Firmware Bank</title>
+  <title data-i18n="title">RF-BOARD ファームウェアバンク</title>
   <style>
     body{font-family:Arial,sans-serif;max-width:900px;margin:40px auto;padding:0 16px;background:#0b1220;color:#d9e1f2}
     a{color:#7cc4ff}
@@ -12,20 +12,97 @@
     .btn{display:inline-block;background:#7cc4ff;color:#06111f;font-weight:bold;padding:10px 18px;border-radius:8px;text-decoration:none;margin-top:8px}
     .btn:hover{filter:brightness(1.08)}
     .muted{color:#93a3c2;font-size:0.85rem}
+    .langbar{display:flex;justify-content:flex-end;gap:6px;margin-bottom:12px}
+    .langbar button{background:#121c31;color:#93a3c2;border:1px solid #223052;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem}
+    .langbar button.active{background:#7cc4ff;color:#06111f;border-color:#7cc4ff;font-weight:bold}
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>RF-BOARD Firmware Bank</h1>
-    <p>Static firmware repository for RF-BOARD OTA update.</p>
-    <p><a href="./latest.json">Open latest.json</a></p>
-    <p><a href="./firmware/">Open firmware folder</a></p>
+  <div class="langbar">
+    <button data-lang="ja">日本語</button>
+    <button data-lang="en">English</button>
+    <button data-lang="id">Indonesia</button>
   </div>
 
   <div class="card">
-    <h2>Base Firmware</h2>
-    <p class="muted">Firmware awal untuk flashing pertama kali via BOOTSEL/UF2 (RF_RP2040_RX_V_1_0_SINGLECORE).</p>
-    <a class="btn" href="./basefirmware_rfboardrp2040_1_1_12/firmware.uf2" download>Download Base Firmware (.uf2) &mdash; v1.1.12</a>
+    <h1 data-i18n="heading">RF-BOARD ファームウェアバンク</h1>
+    <p data-i18n="desc">RF-BOARD OTAアップデート用の静的ファームウェアリポジトリです。</p>
+    <p><a href="./latest.json" data-i18n="linkLatest">latest.json を開く</a></p>
+    <p><a href="./firmware/" data-i18n="linkFolder">firmware フォルダを開く</a></p>
   </div>
+
+  <div class="card">
+    <h2 data-i18n="baseTitle">ベースファームウェア</h2>
+    <p class="muted" data-i18n="baseDesc">BOOTSEL/UF2経由での初回書き込み用ファームウェアです (RF_RP2040_RX_V_1_0_SINGLECORE)。</p>
+    <a class="btn" href="./basefirmware_rfboardrp2040_1_1_12/firmware.uf2" download>
+      <span data-i18n="baseBtn">ベースファームウェアをダウンロード (.uf2)</span> &mdash; v1.1.12
+    </a>
+  </div>
+
+  <script>
+    const translations = {
+      ja: {
+        htmlLang: 'ja',
+        title: 'RF-BOARD ファームウェアバンク',
+        heading: 'RF-BOARD ファームウェアバンク',
+        desc: 'RF-BOARD OTAアップデート用の静的ファームウェアリポジトリです。',
+        linkLatest: 'latest.json を開く',
+        linkFolder: 'firmware フォルダを開く',
+        baseTitle: 'ベースファームウェア',
+        baseDesc: 'BOOTSEL/UF2経由での初回書き込み用ファームウェアです (RF_RP2040_RX_V_1_0_SINGLECORE)。',
+        baseBtn: 'ベースファームウェアをダウンロード (.uf2)',
+      },
+      en: {
+        htmlLang: 'en',
+        title: 'RF-BOARD Firmware Bank',
+        heading: 'RF-BOARD Firmware Bank',
+        desc: 'Static firmware repository for RF-BOARD OTA update.',
+        linkLatest: 'Open latest.json',
+        linkFolder: 'Open firmware folder',
+        baseTitle: 'Base Firmware',
+        baseDesc: 'Firmware for the first flash via BOOTSEL/UF2 (RF_RP2040_RX_V_1_0_SINGLECORE).',
+        baseBtn: 'Download Base Firmware (.uf2)',
+      },
+      id: {
+        htmlLang: 'id',
+        title: 'RF-BOARD Firmware Bank',
+        heading: 'RF-BOARD Firmware Bank',
+        desc: 'Repositori firmware statis untuk update OTA RF-BOARD.',
+        linkLatest: 'Buka latest.json',
+        linkFolder: 'Buka folder firmware',
+        baseTitle: 'Base Firmware',
+        baseDesc: 'Firmware awal untuk flashing pertama kali via BOOTSEL/UF2 (RF_RP2040_RX_V_1_0_SINGLECORE).',
+        baseBtn: 'Download Base Firmware (.uf2)',
+      },
+    };
+
+    const STORAGE_KEY = 'rfboard-lang';
+    const DEFAULT_LANG = 'ja';
+
+    function applyLang(lang) {
+      const t = translations[lang] || translations[DEFAULT_LANG];
+      document.documentElement.lang = t.htmlLang;
+      document.title = t.title;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      document.querySelectorAll('.langbar button').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('.langbar button').forEach((btn) => {
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    });
+
+    let initialLang = DEFAULT_LANG;
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && translations[saved]) initialLang = saved;
+    } catch (e) {}
+    applyLang(initialLang);
+  </script>
 </body>
 </html>
